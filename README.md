@@ -26,6 +26,13 @@ Add aliases:
 #kubectl autocomplete
 source <(kubectl completion bash)
 
+#Exec into a C2 pod
+c2exec() {
+	namespace=${2:-saas-dev}
+	kubectl exec -it $(kubectl get pod --selector=app=$1 -n $namespace -o jsonpath='{.items[*].metadata.name}') -n $namespace -- powershell
+}
+alias c2exec=setToken
+
 #k3s
 alias k3ktl='k3s kubectl'
 alias k3proxy='sudo k3s kubectl proxy'
