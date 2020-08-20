@@ -11,7 +11,7 @@ Add to `~/.bashrc` to create an alias:
 Then copy ~/.aws/config and add
 ```
 [profile reset]
-aws_access_key_id=access_key_od
+aws_access_key_id=access_key_id
 aws_secret_access_key=secret_access_key
 region = ap-southeast-2
 output = json
