@@ -7,6 +7,16 @@ Add to `~/.bashrc` to create an alias:
 
 `source /home/dylan/Documents/aws-mfa-script/alias.sh`
 
+`aws configure` and set up the access key from EC2 console. 
+Then copy ~/.aws/config and add
+```
+[profile reset]
+aws_access_key_id=access_key_od
+aws_secret_access_key=secret_access_key
+region = ap-southeast-2
+output = json
+```
+
 Modify ~/Documents/mfa.sh:
 ```
 #!/bin/bash
