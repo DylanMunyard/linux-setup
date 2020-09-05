@@ -71,12 +71,17 @@ echo "MFA Token Code: $MFA_TOKEN_CODE"
 echo "Your Temporary Creds:"
 aws --profile $AWS_CLI_PROFILE sts get-session-token --duration 129600 \
   --serial-number $ARN_OF_MFA --token-code $MFA_TOKEN_CODE --output text \
-  | awk '{printf("export AWS_ACCESS_KEY_ID=\"%s\"\nexport AWS_SECRET_ACCESS_KEY=\"%s\"\nexport AWS_SESSION_TOKEN=\"%s\"\nexport AWS_SECURITY_TOKEN=\"%s\"\n",$2,$4,$5,$5)}' | tee ~/Documents/aws-mfa-script/.token_file
+  | awk '{printf("AWS_ACCESS_KEY_ID=\"%s\"\nAWS_SECRET_ACCESS_KEY=\"%s\"\nAWS_SESSION_TOKEN=\"%s\"\nAWS_SECURITY_TOKEN=\"%s\"\n",$2,$4,$5,$5)}' | tee ~/Documents/aws-mfa-script/.token_file
 
-aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID 
-aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-aws configure set aws_session_token $AWS_SESSION_TOKEN
-aws configure set aws_security_token $AWS_SECURITY_TOKEN
+echo 'aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID' >> ~/Documents/aws-mfa-script/.token_file
+echo 'aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY' >> ~/Documents/aws-mfa-script/.token_file
+echo 'aws configure set aws_session_token $AWS_SESSION_TOKEN' >> ~/Documents/aws-mfa-script/.token_file
+echo 'aws configure set aws_security_token $AWS_SECURITY_TOKEN' >> ~/Documents/aws-mfa-script/.token_file
+
+echo 'export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID' >> ~/Documents/aws-mfa-script/.token_file
+echo 'export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY' >> ~/Documents/aws-mfa-script/.token_file
+echo 'export AWS_SESSION_TOKEN=$AWS_SESSION_TOKEN' >> ~/Documents/aws-mfa-script/.token_file
+echo 'export AWS_SECURITY_TOKEN=$AWS_SECURITY_TOKEN' >> ~/Documents/aws-mfa-script/.token_file
 ```
 
 Usage: `mfa <token>`
